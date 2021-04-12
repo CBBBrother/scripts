@@ -12,12 +12,12 @@ def getAccessToken(client_id, client_token, user, password):
     return response.json().get("access_token", None)
 
 def getSaved(user, token, after):
-    saved_headers = {"Authorization": "bearer {}".format(token)}
+    saved_headers = {"Authorization": f"bearer {token}"}
     saved_headers.update(headers)
     params = {}
     if after:
         params.update({"after": after})
-    response = requests.get("https://oauth.reddit.com/user/{}/saved/".format(user), params=params, headers=saved_headers)
+    response = requests.get(f"https://oauth.reddit.com/user/{user}/saved/", params=params, headers=saved_headers)
     return response.json()["data"]
 
 def getFileName(user, title, url):
